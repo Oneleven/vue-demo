@@ -53,7 +53,7 @@ var app = new Vue({
         fullname:{
             // getter函数用于读取
             get(){
-                return this.name.firstName + '' + this.name.lastName
+                return this.name.firstName + ' ' + this.name.lastName
             },
 
             //setter函数用于改写，这两个函数都在computed内部！
@@ -66,4 +66,12 @@ var app = new Vue({
     }
 })
 
-app.fullname='heihei due'
+var app2 = new Vue({
+    el:'#app2',
+    computed:{
+        message(){
+            return app.package1[1].name  // computed计算属性可以依赖其他实例的数据
+        } 
+    }
+})
+app.fullname='hei due'
