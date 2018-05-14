@@ -11,6 +11,8 @@ new Vue({
     filters:{
         formatDate(value){  //这里的value就是{{time|formatDate}}里面的time
             const data = new Date(value)
+            // 这里多次一举，直接用value即可，value就是插值中的{{time}}，也是data数据里面的time
+            //const day = value.getDate()
             const month = padData(data.getMonth() + 1) //getMonth返回的是0~11，所以要加上1
             const year = data.getFullYear()
             const day = data.getDate()  //区分data.getDay(),表示星期中的第几天0~6
