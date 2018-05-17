@@ -31,7 +31,18 @@ var app = new Vue({
     },
 
     methods:{
-
+        reduce(index){
+            if(this.list[index].count === 0){
+                return 
+            }
+            this.list[index].count --
+        },
+        add(index){
+            this.list[index].count ++
+        },
+        remove(index){
+            this.list.splice(index,1)
+        }
     }
 
 })

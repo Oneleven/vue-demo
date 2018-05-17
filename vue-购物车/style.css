@@ -1,0 +1,13 @@
+[v-cloak] {
+    display: none
+}
+
+table{
+    border:1px solid #dddddd;
+    border-collapse: collapse;
+}
+
+td, th{
+    border:1px solid #dddddd;
+    padding:8px;
+}
