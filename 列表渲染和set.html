@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>列表渲染</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <!-- <li v-for="(item, index) of list">{{item}} ==== {{index}}</li> -->
+            <li v-for="(value,key,index) of items">{{value}} =={{key}}=={{index}}</li>
+        </ul>
+    </div>
+
+
+    <script>
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                list:['heihei','haha','wangwang','miaomiao'],
+                items:{
+                    name:'jack',
+                    age:18,
+                    city:'shanghai'
+                }
+            },  
+        })
+        
+    // 要实时地根据数组的变化显示在view层，使用vue的变异方法pop,push,unshift,shift,splice,reverse,sort;
+    // 或者使用Vue.set(vm.xxx,index,value)
+
+    // 要实时改变对象，也可以使用vm.$set(vm.xx,key,value)
+    </script>
+</body>
+</html>

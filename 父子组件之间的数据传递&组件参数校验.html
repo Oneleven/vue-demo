@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>父子组件之间数据传递</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <count :content='1' @change="handleChange"></count>
+        <count :content="2" @change="handleChange"></count>
+        <div> Total:{{total}} </div>
+    </div>
+
+
+    <script>
+        const counter = {
+            props:['content'],
+            // props:{
+            //     //content:Number
+            //     content:[Number,String]
+            // }
+
+            props:{
+                content:{
+                    type:String,
+                    required:true,
+                    default:'这是默认值',
+                    validator:(value)=>{
+                        return value.length > 3
+                    }
+                }
+            }
+
+
+            template:'<div @click="handleClick">{{ sonContent }}</div>',
+            data(){
+                return {
+                    sonContent:this.content 
+                }
+            },
+            methods:{
+                handleClick(){
+                    //this.content ++
+                    this.sonContent ++
+                    this.$emit('change',1)
+                }
+            }
+        }
+
+        const vm = new Vue({
+            el:'#app',
+            components:{
+                count:counter
+            },
+            data:{
+                total:3
+            },
+            methods:{
+                handleChange(step){
+                    this.total += 2
+                }
+            }
+        })
+
+
+    // 父组件向子组件传值： 通过属性传值，子组件的props里接收属性
+    //!! 父传子 是单向传递，子不能修改传递进来的数据。只能通过新的变量赋值来改变
+
+    //子组件向父组件传值：通过this.$emit(xxx,[prop])来发布事件，然后父组件通过v-on:xxx=""来订阅事件
+    </script>
+</body>
+</html>

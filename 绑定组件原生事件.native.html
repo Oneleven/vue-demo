@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算属性</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child @click.native="handleClick"></child>
+    </div>
+
+
+    <script>
+        const aaa = {
+            template:'<div>hello</div>'
+        }
+
+        const vm = new Vue({
+            el:'#app',
+            components:{
+                child:aaa
+            },
+            methods:{
+                handleClick(){
+                    alert('hehe')
+                }
+            }
+        })
+        
+
+    //父组件上绑定的点击等事件是自定义的事件，只有子组件中通过this.$emit('xxx')发布了xxx事件，才能出发
+
+    </script>
+</body>
+</html>

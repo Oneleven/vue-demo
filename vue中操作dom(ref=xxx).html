@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue中操作dom</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- <div id="app" ref="hello">
+        <div @click="handleClick" ref="hello"> hello world</div>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el:'#app',
+            data:{
+               
+            },
+            methods:{
+                handleClick(){
+                    alert(this.$refs.hello.innerHTML)
+                }
+            }
+
+            
+        })       
+    </script> -->
+
+    <div id="app" ref="hello">
+        <count ref="one" @change="handleChange"></count>
+        <count ref="two" @change="handleChange"></count>
+        <div> totoal: {{totoal}}</div>
+    </div>
+
+    <script>
+
+    Vue.component('count',{
+        template:'<div @click="handleClick">{{number}}</div>',
+        data(){
+            return{
+                number:0
+            }
+        },
+        methods:{
+            handleClick(){
+                this.number ++
+                this.$emit('change')   //子组件里的数据要向父组件传值，需要发布一个自定义事件，让父组件监听
+            }
+        }
+    })
+  
+        const vm = new Vue({
+            el: '#app',
+            data:{
+                totoal:0
+            },
+            methods:{
+                handleChange(){
+                    this.totoal = this.$refs.one.number + this.$refs.two.number
+                }
+            }
+        })
+
+
+    //1. 在标签上通过ref来获取到到的dom标签
+    //2. 在组件上通过ref来获取到的是 组件对应的自组件的引用，所以有number属性
+
+
+    </script>
+
+
+
+</body>
+
+</html>

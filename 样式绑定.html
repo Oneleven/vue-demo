@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>样式绑定</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <style>
+        .isActive{
+            color:red;
+        }
+    </style>
+
+    <!-- <div id="app" :class="{isActive:active}" @click='handleClick'>
+        HELLO WORLD
+    </div> -->
+
+    <!-- <div id="app" :class="[active,heihei]" @click='handleClick'>
+            HELLO WORLD
+    </div> -->
+
+    <div id="app" :style="{color:'red',border:'3px solid black'}" @click='handleClick'>
+            HELLO WORLD
+    </div>
+    
+
+    <script>
+        const vm = new Vue({
+            el:'#app',
+            //1.对象方式绑定class
+            // data:{
+            //     active:false
+            // },
+
+            //2. 数组方式绑定class
+            // data:{
+            //     active:'',
+            //     heihei:'haha'
+            // },
+            // methods:{
+            //     handleClick(){
+            //         this.active=this.active === 'isActive'?'':'isActive'
+            //     }
+            // }
+
+            data:{
+                styleObj:{
+                    color:'red',  //括号
+                    border:'1px solid black'
+                }
+            }
+            
+        })
+        
+    //1. 绑定class，写class对应的样式，通过切换class来实现（有对象，数组两种方式）
+    //2. 直接绑定内联样式，可以通过变量引用data里的样式 or 直接写在标签上。
+
+    </script>
+</body>
+</html>

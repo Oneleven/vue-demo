@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>非父子组件间的传值(Bus/总线)</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child content="tom"></child>
+        <child content="jack"></child>
+    </div>
+
+
+    <script>
+
+        Vue.prototype.bus = new Vue()
+
+        Vue.component('child',{
+            props:['content'],
+            data(){
+                return{
+                    soncontent:this.content
+                }
+            },
+            template:'<div @click="handleClick"> {{soncontent}} </div>',
+            methods:{
+                handleClick(){
+                    this.bus.$emit('change',this.soncontent)  //通过vue实例原型上的bus属性，来发布一个自定义事件
+                }
+            },
+            mounted:function(){
+                var _this = this
+                this.bus.$on('change',(val)=>{
+                    _this.soncontent =val
+                })
+            }
+        })
+        const vm = new Vue({
+            el:'#app'
+        })
+        
+    </script>
+</body>
+</html>
