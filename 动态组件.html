@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动态组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+            <childone v-if="type === 'childone'"></childone>
+            <childtwo v-if="type === 'childtwo'"></childtwo> 
+           <!--  <component :is="type"></component> -->
+            <button @click="handleClick">toggle</button>
+    </div>
+
+
+    <script>
+        const child1={
+            template:'<div v-once> one </div>',  //v-once会缓存，提高展示效率，不用频繁地展示销毁
+        }
+        const child2={
+            template:'<div v-once> two </div>'
+        }
+
+        const vm = new Vue({
+            el:'#app',
+            components:{
+                childone:child1,
+                childtwo:child2
+            },
+            data:{
+                type:'childone'
+            },
+            methods:{
+                handleClick(){
+                    this.type = this.type === 'childone'?'childtwo':'childone'
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>
