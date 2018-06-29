@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算属性</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{fullname}}
+    </div>
+
+
+    <script>
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                firstname:'tom',
+                lastname:'jarry'
+            },
+            computed:{
+                // fullname(){
+                //     return this.firstname + ' '+ this.lastname
+                // }
+                fullname:{
+                    get(){
+                        return this.firstname + ' +++ ' + this.lastname
+                    },
+                    set(value){
+                        const name = value.split(' ')
+                        this.firstname = name[0]
+                        this.lastname = name[1]
+
+                    //当调用vm.fullname = 'heihei haha'时，改变fullname的值
+                    }
+                }
+            }
+            
+        })
+        
+    </script>
+</body>
+</html>
